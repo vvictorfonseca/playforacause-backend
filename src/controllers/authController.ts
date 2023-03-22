@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import authService, { CreateUserData, CreateUserLogin } from "../services/authService";
 
 async function createUser(req: Request, res: Response) {
-  console.log("entrou aqui")
   const newUser: CreateUserData = req.body
 
   await authService.createUser(newUser)
