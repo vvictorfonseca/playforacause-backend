@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import authService, { CreateUserData, CreateUserLogin } from "../services/authService";
 
 async function createUser(req: Request, res: Response) {
-  console.log("aqui")
+  console.log("entrou aqui")
   const newUser: CreateUserData = req.body
 
   await authService.createUser(newUser)
@@ -18,4 +18,10 @@ async function loginUser(req: Request, res: Response) {
   return res.status(200).send(userData)
 }
 
-export { createUser, loginUser }
+async function getUsers(req: Request, res: Response) {
+  const users = await authService.getUsers()
+
+  return res.status(200).send(users)
+}
+
+export { createUser, loginUser, getUsers }

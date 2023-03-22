@@ -15,9 +15,16 @@ async function getUserByEmail(email: string) {
   return user
 }
 
+async function getUsers() {
+  const users = await prisma.users.findMany()
+
+  return users
+}
+
 const authRepository = {
   createUser,
-  getUserByEmail
+  getUserByEmail,
+  getUsers
 }
 
 export default authRepository

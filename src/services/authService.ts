@@ -42,9 +42,16 @@ async function loginUser(newLogin: CreateUserLogin) {
   return data
 }
 
+async function getUsers() {
+  const user = await authRepository.getUsers()
+
+  return user
+}
+
 const authService = {
   createUser,
-  loginUser
+  loginUser,
+  getUsers
 }
 
 export default authService
