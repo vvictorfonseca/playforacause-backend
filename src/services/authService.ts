@@ -25,6 +25,7 @@ async function createUser(newUser: CreateUserData) {
 
 async function loginUser(newLogin: CreateUserLogin) {
   const user = await decryptPassword(newLogin.email, newLogin.password)
+  console.log(user)
 
   const expiresAt = { expiresIn: 60 * 60 * 24 };
   const key = process.env.JWT_SECRET_KEY!
