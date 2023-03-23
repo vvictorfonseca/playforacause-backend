@@ -1,4 +1,3 @@
-version: '3.8'
 service:
   db_postgres_github-ci:
     image: postgres

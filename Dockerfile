@@ -8,4 +8,4 @@ EXPOSE 5000
 
 RUN npm i
 
-CMD ["node", "server.js"]
+CMD ["node", "server.ts"]
