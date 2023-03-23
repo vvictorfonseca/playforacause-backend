@@ -2,7 +2,20 @@ import { Request, Response } from "express";
 import cartsService, { CreateCartData, CreateUpdateCart } from "../services/cartsService";
 
 async function addToCart(req: Request, res: Response) {
-  const newCart: CreateCartData =  req.body
+  const userId = res.locals.user.id
+
+  interface IBody {
+    productId: number;
+    units: number
+  }
+  
+  const body: IBody =  req.body
+
+  const newCart: CreateCartData = {
+    userId,
+    productId: body.productId,
+    units: body.units
+  }
 
   await cartsService.addToCart(newCart)
 
@@ -10,7 +23,7 @@ async function addToCart(req: Request, res: Response) {
 }
 
 async function getUserCart(req: Request, res: Response) {
-  const userId = parseInt(req.params.userId)
+  const userId = res.locals.user.id
 
   const cart = await cartsService.getUserCart(userId)
 
@@ -18,11 +31,11 @@ async function getUserCart(req: Request, res: Response) {
 }
 
 async function decrementUnitFromUserCart(req: Request, res: Response) {
-  const userId = parseInt(req.params.userId)
-  const cartId = req.body
+  const userId = res.locals.user.id
+  const cartId = parseInt(req.params.cartId)
 
   const body: CreateUpdateCart = {
-    id: cartId.cartId,
+    id: cartId,
     userId
   }
 

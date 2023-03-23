@@ -35,7 +35,7 @@ async function getUserCart(userId: number) {
 }
 
 async function deleteProductInCart(cartId: number) {
-  await cartsRepository.getCartById(cartId)
+  await cartsRepository.deleteProductFromCart(cartId)
 }
 
 const cartsService = {
