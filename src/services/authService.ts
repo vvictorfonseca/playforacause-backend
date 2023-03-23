@@ -44,6 +44,7 @@ async function loginUser(newLogin: CreateUserLogin) {
 
 async function getUsers() {
   const user = await authRepository.getUsers()
+  console.log(user)
 
   return user
 }
