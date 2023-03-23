@@ -49,7 +49,7 @@ async function getProductById(id: number) {
       id
     }
   })
-
+  
   return product
 }
 

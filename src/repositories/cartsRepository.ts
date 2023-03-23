@@ -1,5 +1,5 @@
 import prisma from "../config/database";
-import { CreateCartData } from "../services/cartsService";
+import { CreateCartData, CreateUpdateCart } from "../services/cartsService";
 
 async function addToCart(newCart: CreateCartData) {
   await prisma.carts.create({data: newCart})
@@ -25,11 +25,85 @@ async function getUserCart(userId: number) {
   })
 
   return carts
-} 
+}
+
+async function getCartById(cartId: number) {
+  const cart = await prisma.carts.findFirst({
+    where: {
+      id: cartId
+    },
+    select: {
+      units: true
+    }
+  })
+
+  return cart
+}
+
+async function getCartByProductId(productId: number, userId: number) {
+  const cart = prisma.carts.findFirst({
+    where: {
+      productId,
+      userId
+    },
+    include: {
+      products: {
+        select: {
+          id: true,
+          name: true,
+          units: true
+        }
+      }
+    }
+  })
+
+  return cart
+}
+
+async function incrementUnitsIfProductIsAlreadyOnUserCart(cartId: number, units: number, userId: number) {
+  await prisma.carts.updateMany({
+    where: {
+      id: cartId,
+      userId: userId
+    },
+    data: {
+      units: {
+        increment: units
+      }
+    }
+  })
+}
+
+async function decrementProductUnitFromUserCart(updateCart: CreateUpdateCart) {
+  await prisma.carts.updateMany({
+    where: {
+      id: updateCart.id,
+      userId: updateCart.userId
+    },
+    data: {
+      units: {
+        decrement: 1
+      }
+    }
+  })
+}
+
+async function deleteProductFromCart(cartId: number) {
+  await prisma.carts.deleteMany({
+    where: {
+      id: cartId
+    }
+  })
+}
 
 const cartsRepository = {
   addToCart,
-  getUserCart
+  getUserCart,
+  getCartById,
+  getCartByProductId,
+  incrementUnitsIfProductIsAlreadyOnUserCart,
+  decrementProductUnitFromUserCart,
+  deleteProductFromCart
 }
 
 export default cartsRepository
