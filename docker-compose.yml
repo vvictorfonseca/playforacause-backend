@@ -16,7 +16,7 @@ service:
     ports:
       - 5000:5000
     depends_on:
-      - db_postgres_github
+      - db_postgres_github-ci
     env_file:
       - .env
 
