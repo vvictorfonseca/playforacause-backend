@@ -39,6 +39,7 @@ model carts {
   id        Int       @id @default(autoincrement())
   userId    Int
   productId Int
+  units     Int
 
   users     users     @relation(fields: [userId], references: [id])
   products  products  @relation(fields: [productId], references: [id])

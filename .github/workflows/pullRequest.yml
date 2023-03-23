@@ -14,8 +14,8 @@ jobs:
         with:
           envKey_POSTGRES_USER: ${{secrets.POSTGRES_PASSWORD}}
           envKey_POSTGRES_PASSWORD: ${{secrets.POSTGRES_USER}}
-          envKey_POSTGRES_DB: "PFAC-DB-tests"
+          envKey_POSTGRES_DB: "postgres"
           envKey_DATABASE_URL: ${{secrets.DATABASE_URL}}
           file_name: .env.test
       - name: Run tests
-        run: npm run test
+        run: docker-compose -f docker-compose-tests.yml run node_app_github-ci npm run test
