@@ -1,0 +1,21 @@
+# fazer com que o pull request rode todos os testes
+# se ok, quero aceitar o pullRequest. Caso contrário, vai falhar
+
+name: Pull request
+on: [pull_request]
+jobs:
+  PullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Make a new envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envKey_POSTGRES_USER: "postgres"
+          envKey_POSTGRES_PASSWORD: "1531Lotr2965"
+          envKey_POSTGRES_DB: "postgres"
+          envKey_DATABASE_URL: "postgresql://postgres:1531Lotr2965@db_postgres_github-ci:5432/PFAC-DB-tests"
+          file_name: .env.test
+      - name: Run tests
+        run: "docker-compose -f docker-compose-tests.yml run node_app_github-ci npm run test"
