@@ -18,4 +18,4 @@ jobs:
           envKey_DATABASE_URL: ${{secrets.DATABASE_URL}}
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f docker-compose-tests.yml run node_app_github-ci npm run test
+        run: npm run test
