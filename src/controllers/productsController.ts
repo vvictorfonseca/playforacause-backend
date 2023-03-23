@@ -16,6 +16,7 @@ async function getProducts(req: Request, res: Response) {
 }
 
 async function decrementProductUnits(req: Request, res: Response) {
+  console.log("aia ai")
   const id: number = parseInt(req.params.id)
 
   await productsService.decrementProductUnits(id)
