@@ -8,9 +8,9 @@ service:
     env_file:
       - .env
     volumes:
-      - pg_github_ci:/var/lib/postgresql/data
+      - pg_github-ci:/var/lib/postgresql/data
 
-  node_app_github-ci
+  node_app_github-ci:
     container_name: node_app_github-ci
     build: .
     ports:
@@ -21,4 +21,4 @@ service:
       - .env
 
 volumes:
-  pg_github_ci:
+  pg_github-ci:
