@@ -18,6 +18,7 @@ async function loginUser(req: Request, res: Response) {
 }
 
 async function getUsers(req: Request, res: Response) {
+  console.log("teste feature")
   const users = await authService.getUsers()
 
   return res.status(200).send(users)
