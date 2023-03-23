@@ -12,10 +12,10 @@ jobs:
       - name: Make a new envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          envKey_POSTGRES_USER: "postgres"
-          envKey_POSTGRES_PASSWORD: "1531Lotr2965"
+          envKey_POSTGRES_USER: ${{secrets.POSTGRES_PASSWORD}}
+          envKey_POSTGRES_PASSWORD: ${{secrets.POSTGRES_USER}}
           envKey_POSTGRES_DB: "postgres"
-          envKey_DATABASE_URL: "postgresql://postgres:1531Lotr2965@db_postgres_github-ci:5432/PFAC-DB-tests"
+          envKey_DATABASE_URL: ${{secrets.DATABASE_URL}}
           file_name: .env.test
       - name: Run tests
         run: "docker-compose -f docker-compose-tests.yml run node_app_github-ci npm run test"
