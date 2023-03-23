@@ -19,6 +19,7 @@ async function loginUser(req: Request, res: Response) {
 
 async function getUsers(req: Request, res: Response) {
   const users = await authService.getUsers()
+  console.log(users)
 
   return res.status(200).send(users)
 }
