@@ -27,6 +27,26 @@ describe("User signUp tests", () => {
     expect(response.statusCode).toEqual(401)
   })
 
+  it("return 422 for password with less than 4 digts", async () => {
+    const data = authFactory.createUserSignUp()
+
+    const response = await agent.post("/user").send({
+      email: data.email,
+      password: faker.internet.password(3),
+      firstName: data.firstName,
+      surname: data.surname
+    })
+
+    expect(response.statusCode).toEqual(422)
+  })
+
+  it("return 422 for empty required input", async () => {
+    const data = authFactory.createUserSignUp()
+    delete data.firstName
+
+    const response = await agent.post("/user").send(data)
+    expect(response.statusCode).toEqual(422)
+  })  
 })
 
 describe("User login tests", () => {
@@ -64,6 +84,17 @@ describe("User login tests", () => {
 
     expect(response.statusCode).toEqual(404)
   })
+
+  it("return 422 for empty required input", async () => {
+    const data = await authFactory.createValidUser()
+
+    const response = await agent.post("/user/login").send({
+      email: data.email, 
+      password: ""
+    })
+
+    expect(response.statusCode).toEqual(422)
+  }) 
 })
 
 afterAll(async () => {
