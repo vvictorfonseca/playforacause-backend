@@ -25,7 +25,7 @@ model products {
   id          Int     @id @default(autoincrement())
   name        String
   image       String
-  price       String
+  price       Int
   description String
   size        String?
   club        String?
