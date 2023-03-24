@@ -20,6 +20,12 @@ async function getProducts() {
   return products
 }
 
+async function getProductById(productId: number) {
+  const product = await productsRepository.getProductById(productId)
+
+  return product
+}
+
 async function decrementProductUnits(id: number) {
   const product = await productsRepository.getProductById(id)
 
@@ -33,7 +39,8 @@ async function decrementProductUnits(id: number) {
 const productsService = {
   createProduct,
   getProducts,
-  decrementProductUnits
+  decrementProductUnits,
+  getProductById
 }
 
 export default productsService

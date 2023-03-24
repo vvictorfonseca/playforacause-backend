@@ -15,6 +15,14 @@ async function getProducts(req: Request, res: Response) {
   return res.status(200).send(products)
 }
 
+async function getProductById(req: Request, res: Response) {
+  const productId = parseInt(req.params.productId)
+
+  const product = await productsService.getProductById(productId)
+
+  return res.status(200).send(product)
+}
+
 async function decrementProductUnits(req: Request, res: Response) {
   const id: number = parseInt(req.params.id)
 
@@ -23,4 +31,4 @@ async function decrementProductUnits(req: Request, res: Response) {
   return res.sendStatus(201)
 }
 
-export { createProduct, getProducts, decrementProductUnits }
+export { createProduct, getProducts, getProductById, decrementProductUnits }
