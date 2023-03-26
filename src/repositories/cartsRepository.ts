@@ -13,6 +13,7 @@ async function getUserCart(userId: number) {
     include: {
       products: {
         select: {
+          id: true,
           name: true,
           price: true,
           description: true,
@@ -21,6 +22,9 @@ async function getUserCart(userId: number) {
           units: true
         }
       }
+    },
+    orderBy: {
+      id: 'asc'
     }
   })
 
@@ -74,6 +78,20 @@ async function incrementUnitsIfProductIsAlreadyOnUserCart(cartId: number, units:
   })
 }
 
+async function incrementProductUnitFromUserCart(updateCart: CreateUpdateCart) {
+  await prisma.carts.updateMany({
+    where: {
+      id: updateCart.id,
+      userId: updateCart.userId
+    },
+    data: {
+      units: {
+        increment: 1
+      }
+    }
+  })
+}
+
 async function decrementProductUnitFromUserCart(updateCart: CreateUpdateCart) {
   await prisma.carts.updateMany({
     where: {
@@ -103,6 +121,7 @@ const cartsRepository = {
   getCartByProductId,
   incrementUnitsIfProductIsAlreadyOnUserCart,
   decrementProductUnitFromUserCart,
+  incrementProductUnitFromUserCart,
   deleteProductFromCart
 }
 

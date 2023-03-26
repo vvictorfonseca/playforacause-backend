@@ -6,7 +6,7 @@ async function checkProductStock(productId: number, units: number) {
   const product = await productsRepository.getProductById(productId)
 
   if (product.units < units) {
-    throw { type: "not_allowed", message: `Sorry, we have just ${product.units} of this product on our stock` }
+    throw { type: "not_allowed", message: `Desculpa, temos apenas ${product.units} unidades deste produto no estoque` }
   }
 }
 
@@ -17,10 +17,9 @@ async function checkIfProductIsAlreadyOnCart(newCart: CreateCartData) {
   if (productInCart) {
     if (productInCart.units + newCart.units > product.units) {
 
-      throw { type: "not_allowed", message: `Sorry, we no longer have these units in stock.` }
+      throw { type: "not_allowed", message: `Todas as unidades em nosso estoque já estão no seu carrinho` }
 
     } else {
-
       cartsRepository.incrementUnitsIfProductIsAlreadyOnUserCart(productInCart.id, newCart.units, newCart.userId)
       return false
     }

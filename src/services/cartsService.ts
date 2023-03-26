@@ -15,6 +15,10 @@ async function addToCart(newCart: CreateCartData) {
   addNewCart ? await cartsRepository.addToCart(newCart) : null
 }
 
+async function incrementUnitFromUserCart(updateCart: CreateUpdateCart) {
+  await cartsRepository.incrementProductUnitFromUserCart(updateCart)
+}
+
 async function decrementUnitFromUserCart(updateCart: CreateUpdateCart) {
   const cart = await cartsRepository.getCartById(updateCart.id)
 
@@ -41,6 +45,7 @@ async function deleteProductInCart(cartId: number) {
 const cartsService = {
   addToCart,
   getUserCart,
+  incrementUnitFromUserCart,
   decrementUnitFromUserCart,
   deleteProductInCart
 }

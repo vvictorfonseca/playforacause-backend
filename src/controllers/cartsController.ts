@@ -30,8 +30,22 @@ async function getUserCart(req: Request, res: Response) {
   return res.status(200).send(cart)
 }
 
+async function incrementUnitFromUserCart(req: Request, res: Response) {
+  const userId: number = res.locals.user.id
+  const cartId = parseInt(req.params.cartId)
+
+  const body: CreateUpdateCart = {
+    id: cartId,
+    userId
+  }
+
+  await cartsService.incrementUnitFromUserCart(body)
+
+  return res.sendStatus(200)
+}
+
 async function decrementUnitFromUserCart(req: Request, res: Response) {
-  const userId = res.locals.user.id
+  const userId: number = res.locals.user.id
   const cartId = parseInt(req.params.cartId)
 
   const body: CreateUpdateCart = {
@@ -52,4 +66,4 @@ async function deleteProductInCart(req: Request, res: Response) {
   return res.status(200).send({message: "Produto apagado do seu carrinho com sucesso!"})
 }
 
-export { addToCart, getUserCart, decrementUnitFromUserCart, deleteProductInCart }
+export { addToCart, getUserCart, incrementUnitFromUserCart, decrementUnitFromUserCart, deleteProductInCart }

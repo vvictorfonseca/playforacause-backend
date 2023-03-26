@@ -35,6 +35,7 @@ async function loginUser(newLogin: CreateUserLogin) {
   )
 
   const data = {
+    id: user.id,
     firstName: user.firstName,
     token: token
   }
