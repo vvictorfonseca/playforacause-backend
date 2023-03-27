@@ -19,6 +19,7 @@ model users {
 
   carts     carts[]
   purchases purchases[]
+  address     address[]
 }
 
 model products {
@@ -49,7 +50,24 @@ model purchases {
   id        Int       @id @default(autoincrement())
   userId    Int
   productId Int
+  units     Int
+  addressId Int
 
   users     users     @relation(fields: [userId], references: [id])
   products  products  @relation(fields: [productId], references: [id])
+  address   address   @relation(fields: [addressId], references: [id])
+}
+
+model address {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  city        String
+  street      String
+  number      Int
+  district    String
+  complement  String
+
+  users     users     @relation(fields: [userId], references: [id])
+  
+  purchases   purchases[]
 }
