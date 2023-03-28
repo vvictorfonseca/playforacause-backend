@@ -24,5 +24,6 @@ Brechó Fut é um e-commerce de venda de camisas de futebol usadas.
 - Express.js
 - Prisma ORM
 - PostgreSql
+- Deploy: Render
 
 ***
