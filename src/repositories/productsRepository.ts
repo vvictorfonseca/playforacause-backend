@@ -30,14 +30,14 @@ async function deleteProductById(id: number) {
   })
 }
 
-async function decrementProductUnits(id: number) {
+async function decrementProductUnits(id: number, units: number) {
   await prisma.products.updateMany({
     where: {
       id
     },
     data: {
       units: {
-        decrement: 1
+        decrement: units
       }
     }
   })

@@ -23,12 +23,4 @@ async function getProductById(req: Request, res: Response) {
   return res.status(200).send(product)
 }
 
-async function decrementProductUnits(req: Request, res: Response) {
-  const id: number = parseInt(req.params.id)
-
-  await productsService.decrementProductUnits(id)
-
-  return res.sendStatus(201)
-}
-
-export { createProduct, getProducts, getProductById, decrementProductUnits }
+export { createProduct, getProducts, getProductById }

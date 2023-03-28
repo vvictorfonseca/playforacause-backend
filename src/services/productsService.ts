@@ -26,14 +26,8 @@ async function getProductById(productId: number) {
   return product
 }
 
-async function decrementProductUnits(id: number) {
-  const product = await productsRepository.getProductById(id)
-
-  if(product?.units == 0) {
-    throw { type: "not_allowed", message: "This product already has 0 units" }
-  }
-
-  await productsRepository.decrementProductUnits(id)
+async function decrementProductUnits(id: number, units: number) {
+  await productsRepository.decrementProductUnits(id, units)
 }
 
 const productsService = {

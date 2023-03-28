@@ -52,6 +52,7 @@ model purchases {
   productId Int
   units     Int
   addressId Int
+  createdAt   DateTime @default(now())
 
   users     users     @relation(fields: [userId], references: [id])
   products  products  @relation(fields: [productId], references: [id])
@@ -61,11 +62,12 @@ model purchases {
 model address {
   id          Int       @id @default(autoincrement())
   userId      Int
+  cep         String
   city        String
   street      String
-  number      Int
+  number      String
   district    String
-  complement  String
+  complement  String?
 
   users     users     @relation(fields: [userId], references: [id])
   
