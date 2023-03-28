@@ -8,7 +8,7 @@ async function createAddress(req: Request, res: Response) {
   const body: CreateAdressData = {
     userId: userId,
     city: address.city,
-    street:address.city,
+    street:address.street,
     number: address.number,
     district: address.district,
     complement: address.complement,

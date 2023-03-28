@@ -1,10 +1,11 @@
 import { purchases } from "@prisma/client";
 
+import cartsRepository from "../repositories/cartsRepository";
 import addressRepository from "../repositories/adressRepository";
 import purchaseRepository from "../repositories/purchaseRepository";
 import productsService from "./productsService";
 
-export type CreatePurchaseData = Omit<purchases, "id">
+export type CreatePurchaseData = Omit<purchases, "id" | "createdAt">
 
 export interface CreatePurchase {
   id: number;
@@ -35,6 +36,7 @@ async function createPurchase(newPurchase: CreatePurchase[]) {
       addressId: address.id
     })
 
+    await cartsRepository.deleteUserCart(infos.userId)
     await productsService.decrementProductUnits(infos.productId, infos.units)
   })
 }

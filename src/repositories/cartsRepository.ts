@@ -114,6 +114,14 @@ async function deleteProductFromCart(cartId: number) {
   })
 }
 
+async function deleteUserCart(userId: number) {
+  await prisma.carts.deleteMany({
+    where: {
+      userId
+    }
+  })
+}
+
 const cartsRepository = {
   addToCart,
   getUserCart,
@@ -122,7 +130,8 @@ const cartsRepository = {
   incrementUnitsIfProductIsAlreadyOnUserCart,
   decrementProductUnitFromUserCart,
   incrementProductUnitFromUserCart,
-  deleteProductFromCart
+  deleteProductFromCart,
+  deleteUserCart
 }
 
 export default cartsRepository
