@@ -10,14 +10,8 @@ async function createProduct(newProduct: CreateProductData) {
 
 async function getProducts() {
   const allProducts = await productsRepository.getProducts()
-
-  const products = allProducts.filter((product) => product.units > 0)  
-
-  allProducts.forEach((product) => {
-    product.units == 0 ? productsRepository.deleteProductById(product.id) : null
-  })
   
-  return products
+  return allProducts
 }
 
 async function getProductById(productId: number) {

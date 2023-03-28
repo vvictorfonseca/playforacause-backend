@@ -14,6 +14,7 @@ async function getPurchasesByUserId(userId: number) {
     select: {
       id: true,
       units: true,
+      createdAt: true,
 
       products: {
         select: {
@@ -32,7 +33,9 @@ async function getPurchasesByUserId(userId: number) {
         }
       }
     },
-    
+    orderBy: {
+      id: 'desc'
+    }
   })
 
   return purchases
